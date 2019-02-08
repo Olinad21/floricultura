@@ -8,7 +8,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.floricultura.domain.Categoria;
+import br.com.floricultura.domain.Produto;
 import br.com.floricultura.repositories.CategoriaRepository;
+import br.com.floricultura.repositories.ProdutoRepository;
 
 
 
@@ -17,6 +19,9 @@ public class FloriculturaApplication implements CommandLineRunner{
 
 	@Autowired
 	private CategoriaRepository categoriaRepository;
+	
+	@Autowired
+	private ProdutoRepository produtoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(FloriculturaApplication.class, args);
@@ -42,10 +47,27 @@ public class FloriculturaApplication implements CommandLineRunner{
 		Categoria cat15 = new Categoria(null, "Decoraçoes de quarto");
 		Categoria cat16 = new Categoria(null, "Decoraçoes de cozinha");
 		
+		Produto p1 = new Produto(null, "Computador", 2000.0);
+		Produto p2 = new Produto(null, "Impressora", 800.0);
+		Produto p3 = new Produto(null, "Mouse", 60.0);
+
+		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
+		cat2.getProdutos().addAll(Arrays.asList(p2));
+
+		p1.getCategorias().addAll(Arrays.asList(cat1));
+		p2.getCategorias().addAll(Arrays.asList(cat1, cat2));
+		p3.getCategorias().addAll(Arrays.asList(cat1));
+
+		p1.getCategorias().addAll(Arrays.asList(cat4));
+		p2.getCategorias().addAll(Arrays.asList(cat3, cat5,cat6));
+		p3.getCategorias().addAll(Arrays.asList(cat7,cat10));
+		
 		categoriaRepository.saveAll(
 				Arrays.asList(cat1, cat2,cat3,cat4, cat5,cat6,
 							  cat7, cat8,cat9,cat10, cat11,cat12,
 							  cat13, cat14,cat15,cat16));
+		
+		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
 	}
 }
 

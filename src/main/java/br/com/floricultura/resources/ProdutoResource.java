@@ -9,27 +9,26 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.floricultura.domain.Categoria;
-import br.com.floricultura.services.CategoriaService;
-import javassist.tools.rmi.ObjectNotFoundException;
+import br.com.floricultura.domain.Produto;
+import br.com.floricultura.services.ProdutoService;
 
 @RestController
-@RequestMapping("/categorias")
-public class CategoriaResource {
+@RequestMapping("/produtos")
+public class ProdutoResource {
 	
 	@Autowired
-	private CategoriaService service;
+	private ProdutoService service;
 
 	
 	@GetMapping(value="/{id}")
-	public ResponseEntity<Categoria> findById(@PathVariable int id) throws ObjectNotFoundException{		
-		Categoria obj = service.findById(id);
+	public ResponseEntity<Produto> findById(@PathVariable int id){		
+		Produto obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<Categoria>> findAll(){		
-		List<Categoria> list=   service.findAll();
+	public ResponseEntity<List<Produto>> findAll(){		
+		List<Produto> list=   service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 	

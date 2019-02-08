@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.floricultura.domain.Categoria;
 import br.com.floricultura.repositories.CategoriaRepository;
+import br.com.floricultura.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
@@ -16,7 +17,9 @@ public class CategoriaService {
 	
 	public Categoria findById(int id) {
 		Optional<Categoria> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
+				
 	}
 	
 	public List<Categoria> findAll() {

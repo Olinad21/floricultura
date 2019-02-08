@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.floricultura.domain.Produto;
 import br.com.floricultura.repositories.ProdutoRepository;
+import br.com.floricultura.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class ProdutoService {
@@ -16,7 +17,7 @@ public class ProdutoService {
 	
 	public Produto findById(int id) {
 		Optional<Produto> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Produto.class.getName()));
 	}
 	
 	public List<Produto> findAll() {

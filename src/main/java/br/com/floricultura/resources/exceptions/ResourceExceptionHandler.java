@@ -21,7 +21,6 @@ public class ResourceExceptionHandler {
 				(HttpStatus.NOT_FOUND.value(),exception.getMessage(),LocalDateTime.now());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
 		
-		
 	}
 	
 }

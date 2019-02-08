@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.floricultura.domain.Categoria;
 import br.com.floricultura.services.CategoriaService;
-import javassist.tools.rmi.ObjectNotFoundException;
 
 @RestController
 @RequestMapping("/categorias")
@@ -22,7 +21,7 @@ public class CategoriaResource {
 
 	
 	@GetMapping(value="/{id}")
-	public ResponseEntity<Categoria> findById(@PathVariable int id) throws ObjectNotFoundException{		
+	public ResponseEntity<Categoria> findById(@PathVariable int id){		
 		Categoria obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
